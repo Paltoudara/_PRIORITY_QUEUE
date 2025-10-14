@@ -6,6 +6,3 @@
 #define _CONSTEXPR constexpr
 #define _PANAGIOTIS_BEGIN namespace panagiotis{
 #define _PANAGIOTIS_END }
-_PANAGIOTIS_BEGIN
-
-_PANAGIOTIS_END
