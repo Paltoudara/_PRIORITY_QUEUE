@@ -138,7 +138,7 @@ public:
 		}
 		return *this;
 	}
-	~priority_queue() =default;
+	~priority_queue() = default;
 	void show()const {
 		for (std::size_t i = 0; i < _heap.size(); i++) {
 			std::cout << _heap[i] << '\n';
