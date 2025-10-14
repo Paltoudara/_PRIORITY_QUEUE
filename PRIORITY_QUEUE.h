@@ -138,12 +138,7 @@ public:
 		}
 		return *this;
 	}
-	~priority_queue() {
-		if (!_heap.empty()) {
-			_heap.~vector();
-		}
-		_comp.~Compare();
-	}
+	~priority_queue() =default;
 	void show()const {
 		for (std::size_t i = 0; i < _heap.size(); i++) {
 			std::cout << _heap[i] << '\n';
