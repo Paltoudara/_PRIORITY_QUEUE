@@ -81,8 +81,7 @@ public:
 		:_comp{other._comp}, _heap{other._heap} {}
 	//move constructor done
 	priority_queue(priority_queue<_Ty, Compare>&& other)
-		noexcept(std::is_nothrow_move_constructible_v<Compare>
-			&&std::is_nothrow_move_constructible_v<std::vector<_Ty>>)
+		noexcept(std::is_nothrow_move_constructible_v<Compare>)
 		:_comp{std::move(other._comp)}, _heap{std::move(other._heap)}{}
 	bool empty()const noexcept {
 		return _heap.empty();
@@ -119,7 +118,7 @@ public:
 			std::is_nothrow_swappable_v<std::vector<_Ty>>)
 	{
 			std::swap(_comp, other._comp);
-			std::swap(_heap, other._heap);
+			_heap.swap(other._heap);
 	}
 	priority_queue<_Ty, Compare>& operator=(const priority_queue<_Ty, Compare>& other)& {
 		if (this != &other) {
