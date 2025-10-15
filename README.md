@@ -12,14 +12,14 @@ public:
   explicit priority_queue(const Compare& comp)
 		  noexcept(std::is_nothrow_copy_constructible_v<Compare>);
 
-	priority_queue(const Compare& comp, const std::vector<_Ty>& heap);
+  priority_queue(const Compare& comp, const std::vector<_Ty>& heap);
 
-	priority_queue(const Compare& comp, std::vector<_Ty>&& heap);
+  priority_queue(const Compare& comp, std::vector<_Ty>&& heap);
 	
-	priority_queue(const priority_queue<_Ty, Compare>& other);
+  priority_queue(const priority_queue<_Ty, Compare>& other);
 
-	priority_queue(priority_queue<_Ty, Compare>&& other)
-		noexcept(std::is_nothrow_move_constructible_v<Compare>);
+  priority_queue(priority_queue<_Ty, Compare>&& other)
+   noexcept(std::is_nothrow_move_constructible_v<Compare>);
 
   bool empty()const noexcept;
 
