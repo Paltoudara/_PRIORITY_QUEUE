@@ -6,7 +6,7 @@
 #include<cstdlib>
 #include<functional>
 #include<utility>
-#include"Macros.h"
+#include"Header.h"
 _PANAGIOTIS_BEGIN
 template<class _Ty, class Compare = std::less<_Ty>>
 class priority_queue final {
@@ -21,6 +21,7 @@ private:
 		//note that the compare function should be a function that takes two 
 		//const _Ty& args and returns a bool,or else the behavior is 
 		//undefined
+		//also the _Ty must be swappable
 		while (2 * k + 1 < _heap.size()) {
 			std::size_t j{ 2 * k + 1 };
 			if (j + 1 < _heap.size() && _comp(
@@ -36,9 +37,10 @@ private:
 		//note that the compare function should be a function that takes two 
 		//const _Ty& args and returns a bool,or else the behavior is 
 		//undefined
+		//also the _Ty must be swappable
 		while (k > 0 && _comp(std::as_const(_heap[(k - 1) / 2]),
 			std::as_const(_heap[k]))) {
-			std::swap(_heap[(k-1)/2], _heap[k]);
+			std::swap(_heap[(k - 1) / 2], _heap[k]);
 			k = (k - 1) / 2;
 		}
 	}
@@ -48,8 +50,9 @@ public:
 	//comparator constructor done
 	explicit priority_queue(const Compare& comp)
 		noexcept(std::is_nothrow_copy_constructible_v<Compare>)
-		:_heap{},_comp{comp}
-	{}
+		:_heap{}, _comp{ comp }
+	{
+	}
 	//constructor with comp& and heap& done
 	priority_queue(const Compare& comp, const std::vector<_Ty>& heap)
 		:_comp{ comp }, _heap{ heap }
@@ -78,11 +81,13 @@ public:
 	}
 	//copy constructor done
 	priority_queue(const priority_queue<_Ty, Compare>& other)
-		:_comp{other._comp}, _heap{other._heap} {}
+		:_comp{ other._comp }, _heap{ other._heap } {
+	}
 	//move constructor done
 	priority_queue(priority_queue<_Ty, Compare>&& other)
 		noexcept(std::is_nothrow_move_constructible_v<Compare>)
-		:_comp{std::move(other._comp)}, _heap{std::move(other._heap)}{}
+		:_comp{ std::move(other._comp) }, _heap{ std::move(other._heap) } {
+	}
 	bool empty()const noexcept {
 		return _heap.empty();
 	}
@@ -117,8 +122,8 @@ public:
 		noexcept(std::is_nothrow_swappable_v<Compare>&&
 			std::is_nothrow_swappable_v<std::vector<_Ty>>)
 	{
-			std::swap(_comp, other._comp);
-			_heap.swap(other._heap);
+		std::swap(_comp, other._comp);
+		_heap.swap(other._heap);
 	}
 	priority_queue<_Ty, Compare>& operator=(const priority_queue<_Ty, Compare>& other)& {
 		if (this != &other) {
@@ -128,8 +133,8 @@ public:
 		return *this;
 	}
 	priority_queue<_Ty, Compare>& operator=(priority_queue<_Ty, Compare>&& other)
-		&noexcept(std::is_nothrow_move_assignable_v<Compare>
-			&&std::is_nothrow_move_assignable_v<std::vector<_Ty>>)
+		& noexcept(std::is_nothrow_move_assignable_v<Compare>
+			&& std::is_nothrow_move_assignable_v<std::vector<_Ty>>)
 	{
 		if (this != &other) {
 			_comp = std::move(other._comp);
