@@ -5,7 +5,7 @@
 ```cpp
 template<class _Ty, class Compare = std::less<_Ty>>
 class priority_queue final {
-public:
+public: 
 
   priority_queue() = default;
 
