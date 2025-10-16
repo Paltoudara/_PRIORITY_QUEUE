@@ -1,4 +1,4 @@
-//Note that the heap order we want is for every position k to be  greater or equal to it's childern 2k+1 and 2k+2 and less or equal to its parent (k-1)/2
+//Note that the heap order we want is for every position k to be  greater or equal to it's childern 2k+1 and 2k+2 and less or equal to its parent (k-1)/2 
 #pragma once
 #include<iostream>
 #include<vector>
@@ -178,12 +178,14 @@ template<class _Ty, class Compare>
 void priority_queue<_Ty, Compare>::push(const _Ty& val) {
 	_heap.push_back(val);//copy val
 	swim(_heap.size() - 1);//safe because _heap.size()>=1
+	//if swim throws we are in partially modified or not heap
 }
 //same case as push(const _Ty&val)
 template<class _Ty, class Compare>
 void priority_queue<_Ty, Compare>::push(_Ty&& val) {
 	_heap.push_back(std::move(val));//move val
 	swim(_heap.size() - 1);//safe because _heap.size()>=1
+	//if swim throws we are in partially modified or not heap
 }
 //same case as push 
 template<class _Ty, class Compare>
@@ -191,6 +193,7 @@ template<class ..._Valty>
 void priority_queue<_Ty, Compare>::emplace(_Valty&&..._Val) {
 	_heap.emplace_back(std::forward<_Valty>(_Val)...);//we create the object in place
 	swim(_heap.size() - 1);//safe because _heap.size()>=1
+	//if swim throws we are in partially modified or not heap
 }
 //swap with the last element of heap and then take  it out,no we must correct again the heap order so we sink _heap[0] down to the heap if it is 
 //less than its two children 2k+1 and 2k+2
@@ -198,6 +201,7 @@ template<class _Ty, class Compare>
 void priority_queue<_Ty, Compare>::pop() {
 	if (_heap.size() != 0) {
 		std::swap(_heap[0], _heap[_heap.size() - 1]);
+		//if something goes wrong after the swap happens then we are in partially modified heap
 		_heap.pop_back();
 		sink(0);
 	}
