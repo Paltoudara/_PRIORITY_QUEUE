@@ -61,35 +61,36 @@ THIS IS THE INTERFACE OF THE PRIORITY QUEUE,WITH THIS INTERFACE YOU CAN MANIPULA
 
 2) a constructor that takes a comparator argument,and  this comparator is used from now on for the priority queue.
 
-3) a constructor that takes a comparator and a vector argument,the comparator is used from now on for the priority queue and we take a copy of the vector and we make it a heap like structure.Note that a heap structure keeps a certain order for the elements,in simple terms every k element is greater or equal from its 2k+1 and 2k+2 elements.This creates  a binary tree like  data structure which is balanced.
+3) a constructor that takes a comparator and a vector argument,the comparator is used from now on for the priority queue and we take a copy of the vector and we heapify in order to make it a heap order like structure.Note that a heap structure keeps a certain order for the elements,in simple terms every k element is greater or equal from its 2k+1 and 2k+2 elements.This creates  a binary tree like  data structure which is balanced.
 
-4) copy constructor: we copy the state of the other priority queue.
+4) copy constructor: we copy the state of the other priority queue.Note that we don't make any more other than that which means if the other heap is not in order we copy the same not in order heap.
 
-5) move constructor: we take the resourses of the other priority queue
+5) move constructor: we take the resourses of the other priority queue.Note that we don't make more other than that which means if the other heap is not inorder we move the same not in order heap.The other
+is now in valid but unspecified state.
 
-6) empty function just checks if the heap has any elements
+6) empty function just checks if the heap has any elements.
 
-7) size function just checks how many elements the heap has
+7) size function just checks how many elements the heap has.
 
-8) top function just returns only for reading purposes and not changing the first element of the heap
+8) top function just returns the the first element from the heap only for reading purposes and not changing.
 
-9) push with copy,this function just pushes an element at the end of the heap with copy .After this the heap might become invalid so we call a function to fix this and maintain the heap order
+9) push with copy,this function just pushes an element at the end of the heap with copy .After this the heap might become invalid so we call a function to fix this and maintain the heap order.
 
-10) push with move,this function acts the same as push but this time we push the element to the heap with move and not copy
+10) push with move,this function acts the same as push but this time we push the element to the heap with move and not copy.
 
-11) emplace,this function creates the object in place and then pushes it to the heap
+11) emplace,same behavior as push but this time we create the object in place and then pushe it to the heap.
 
-12) pop,this function swaps the first element of the heap aka the maximum or minimum element based on the order with the last element and takes out from the heap.After this the heap might become invalid so we call a function to fix this and maintain the heap order
+12) pop,this function swaps the first element of the heap aka the maximum or minimum element based on the order ,with the last element and takes it out from the heap.After this the heap might become invalid so we call a function to fix this and maintain the heap order.
 
-13) swap,this function swaps our contents with the other's contents
+13) swap,this function swaps our contents with the other's contents.
 
-14) copy operator we copy again the state of the other
+14) copy operator we copy again the state of the other.
 
-15) move operator,we steal the resourses of the other and we leave it in valid but unspecified state
+16) move operator,we steal the resourses of the other and we leave it in valid but unspecified state.
 
-16) destructor,deallocates the heap
+17) destructor,deallocates the heap
 
-17) show,this function just prints how the heap is,use this function only when the type you passed as template to the priority queue is printable with std::cout
+18) show,this function just prints how the heap is,use this function only when the type you passed as template to the priority queue is printable with std::cout
 
 # 📝NOTE THAT:
 IN ORDER TO UNDERSTAND WHAT HAPPENS TO THE FUNCTIONS EXACTLY YOU MUST SEE THE IMPLEMENTATION.
