@@ -91,7 +91,7 @@ is now in valid but unspecified state.
 17) destructor,deallocates the heap
 
 18) show,this function just prints how the heap is,use this function only when the type you passed as template to the priority queue is printable with std::cout
-
+ 
 # 📝NOTE THAT:
 IN ORDER TO UNDERSTAND WHAT HAPPENS TO THE FUNCTIONS EXACTLY YOU MUST SEE THE IMPLEMENTATION.
 # 📬IF YOU HAVE ANY ISSEUES ON THIS PLZ FEEL FREE TO SUBMIT THEM 📬
